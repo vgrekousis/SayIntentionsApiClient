@@ -1,11 +1,13 @@
-﻿using System;
+﻿using SayIntentions;
+using SayIntentionsApiClient.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace SayIntentions
+namespace SayIntentionsApiClient
 {
 
 
@@ -15,6 +17,25 @@ namespace SayIntentions
         private readonly HttpClient _http;
         private readonly string _apiKey;
         private const string BaseUrl = "https://apipri.sayintentions.ai/sapi/";
+
+
+        public static SayIntentionsApiClient CreateFromConfiguration(HttpClient? httpClient = null)
+        {
+            var configPath = "sayintentions-api.json";
+
+            var defaults = new Dictionary<string, string>
+            {
+                ["sayintentions.apikey"] = ""
+            };
+
+            AppConfigManager.Instance.LoadOrCreate(configPath, defaults, defaults.Keys);
+
+            string apiKey = AppConfigManager.Instance.Get("sayintentions.apikey");
+
+            return new SayIntentionsApiClient(apiKey, httpClient);
+        }
+
+        
 
         public SayIntentionsApiClient([DisallowNull] string apiKey, HttpClient? httpClient = null)
         {

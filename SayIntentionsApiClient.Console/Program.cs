@@ -1,6 +1,15 @@
 ﻿using SayIntentions;
+using SayIntentionsApiClient.Configuration;
 
-SayIntentionsApiClient apiClient = new SayIntentionsApiClient("");
+
+var apiClient = SayIntentionsApiClient.SayIntentionsApiClient.CreateFromConfiguration();
+if (string.IsNullOrWhiteSpace(AppConfigManager.Instance.Get("sayintentions.apikey").Trim()))
+{
+    Console.WriteLine("No Say Intentions configuration for API KEY was found");
+    return;
+}
+
+
 var r = await apiClient.GetParking();
 
 if (r.Error != null)
