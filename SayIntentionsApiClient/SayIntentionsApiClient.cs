@@ -9,9 +9,6 @@ using System.Threading.Tasks;
 
 namespace SayIntentionsApiClient
 {
-
-
-
     public class SayIntentionsApiClient
     {
         private readonly HttpClient _http;
@@ -32,7 +29,8 @@ namespace SayIntentionsApiClient
 
             string apiKey = AppConfigManager.Instance.Get("sayintentions.apikey");
 
-            return new SayIntentionsApiClient(apiKey, httpClient);
+            if (!string.IsNullOrWhiteSpace(apiKey)) return new SayIntentionsApiClient(apiKey, httpClient);
+            throw new Exception("No api key set into sayintentions-api.json");
         }
 
         

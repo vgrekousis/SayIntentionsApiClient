@@ -3,11 +3,6 @@ using SayIntentionsApiClient.Configuration;
 
 
 var apiClient = SayIntentionsApiClient.SayIntentionsApiClient.CreateFromConfiguration();
-if (string.IsNullOrWhiteSpace(AppConfigManager.Instance.Get("sayintentions.apikey").Trim()))
-{
-    Console.WriteLine("No Say Intentions configuration for API KEY was found");
-    return;
-}
 
 
 var r = await apiClient.GetParking();
@@ -29,7 +24,7 @@ else
 }
 
 var rch = await apiClient.GetCommsHistory();
-//Console.WriteLine(rch.Comm_History.Count + " entries in comm history");
+//Console.WriteLine(rch.Comm_History.Count + " entries in comm history"); // <--- Always null, either something wrong with the Client or SayIntention returns - To be validated.
 
 var wx = await apiClient.GetWeather("CYUL");
 Console.WriteLine(wx.Airports[0].Atis);
