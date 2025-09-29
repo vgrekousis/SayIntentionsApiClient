@@ -1,6 +1,6 @@
 ﻿using SayIntentions;
 
-SayIntentionsApiClient apiClient = new SayIntentionsApiClient("sivmN8pGao59");
+SayIntentionsApiClient apiClient = new SayIntentionsApiClient("");
 var r = await apiClient.GetParking();
 
 if (r.Error != null)
