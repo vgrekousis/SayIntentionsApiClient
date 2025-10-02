@@ -1,21 +1,6 @@
 ﻿using System.Diagnostics.Eventing.Reader;
 using System.Reflection;
-
-
-public class MethodParamValueDialogResult
-{
-    public Type ClassType {  get; internal set; } = typeof(object);
-    public HashSet<MethodParamValue> MethodParamValues = new HashSet<MethodParamValue>();
-    public DialogResult Result { get; internal set; }
-}
-
-public class MethodParamValue
-{
-    public Type ParameterType { get; internal set; } = typeof(object);
-    public string ParameterName { get; internal set; } = string.Empty;
-    public object? Value { get; internal set; } = null;
-    public int Index { get; internal set; }
-}
+using System.Reflection.Metadata.Ecma335;
 
 public static class MethodParamInputDialog
 {

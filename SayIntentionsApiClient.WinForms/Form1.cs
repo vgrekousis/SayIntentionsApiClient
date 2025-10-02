@@ -9,12 +9,7 @@ namespace SayIntentionsApiClient.WinForms
             var r = MethodParamInputDialog.Show<SayIntentionsApiClient>(this, "AssignGate", "Set the fields", "SI Gate Assignment dialog");
             if (r.Result == DialogResult.OK)
             {
-                StringBuilder sb = new StringBuilder(); 
-                foreach(MethodParamValue pv in r.MethodParamValues)
-                {
-                    sb.AppendLine($"[{pv.ParameterType}] {pv.ParameterName} = {pv.Value}");
-                }
-                MessageBox.Show(sb.ToString());
+                MessageBox.Show(r.ToString());
             }
             InitializeComponent();
         }
