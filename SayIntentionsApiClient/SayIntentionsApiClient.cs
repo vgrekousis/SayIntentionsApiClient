@@ -46,6 +46,8 @@ namespace SayIntentionsApiClient
             where T : class, new()
         {
             var url = $"{BaseUrl}{endpoint}?api_key={_apiKey}";
+            Console.WriteLine(url);
+
             if (parameters != null)
             {
                 foreach (var kv in parameters)
