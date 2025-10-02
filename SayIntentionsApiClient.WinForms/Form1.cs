@@ -6,10 +6,6 @@ namespace SayIntentionsApiClient.WinForms
     {
         public Form1()
         { 
-
-              var method = typeof(SayIntentionsApiClient).GetMethod("AssignGate");
-
-
             var r = MethodParamInputDialog.Show<SayIntentionsApiClient>(this, "AssignGate", "Set the fields", "SI Gate Assignment dialog");
             if (r.Result == DialogResult.OK)
             {
