@@ -5,15 +5,16 @@ using System.Reflection;
 public class MethodParamValueDialogResult
 {
     public Type ClassType {  get; internal set; } = typeof(object);
-    public HashSet<ParamValue> ParamValues = new HashSet<ParamValue>();
+    public HashSet<MethodParamValue>? MethodParamValues = null;
     public DialogResult Result { get; internal set; }
 }
 
-public class ParamValue
+public class MethodParamValue
 {
-    public Type ParamType { get; internal set; } = typeof(object);
-    public string ParamName { get; internal set; } = string.Empty;
+    public Type ParameterType { get; internal set; } = typeof(object);
+    public string ParameterName { get; internal set; } = string.Empty;
     public object? Value { get; internal set; } = null;
+    public int Index { get; internal set; }
 }
 
 public static class MethodParamInputDialog
@@ -97,7 +98,7 @@ public static class MethodParamInputDialog
 
             if (result == DialogResult.OK)
             {
-                
+                r.MethodParamValues = new HashSet<MethodParamValue>();
                 r.ClassType = methodRef.DeclaringType!;
 
                 for (int i = 0; i < parameters.Length; i++)
@@ -112,17 +113,21 @@ public static class MethodParamInputDialog
                         _ => throw new InvalidOperationException("Unknown control type")
                     };
 
-                    //parameterValues[i] = value;
 
-                    var paramValue = new ParamValue
+                    var paramValue = new MethodParamValue
                     {
-                        ParamType = parameters[i].ParameterType,
-                        ParamName = parameters[i].Name!,
-                        Value = value
+                        ParameterType = parameters[i].ParameterType,
+                        ParameterName = parameters[i].Name!,
+                        Value = value,
+                        Index = i,
                     };
 
-                    r.ParamValues.Add(paramValue);
+                    r.MethodParamValues!.Add(paramValue);
                 }
+            }
+            else
+            {
+                r.MethodParamValues = null;
             }
 
             return r;

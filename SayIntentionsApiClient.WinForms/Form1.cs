@@ -10,9 +10,9 @@ namespace SayIntentionsApiClient.WinForms
             if (r.Result == DialogResult.OK)
             {
                 StringBuilder sb = new StringBuilder(); 
-                foreach(ParamValue pv in r.ParamValues)
+                foreach(MethodParamValue pv in r.MethodParamValues)
                 {
-                    sb.AppendLine($"[{pv.ParamType}] {pv.ParamName} = {pv.Value}");
+                    sb.AppendLine($"[{pv.ParameterType}] {pv.ParameterName} = {pv.Value}");
                 }
                 MessageBox.Show(sb.ToString());
             }
