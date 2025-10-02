@@ -8,9 +8,9 @@ namespace SayIntentionsApiClient.WinForms
         { 
 
               var method = typeof(SayIntentionsApiClient).GetMethod("AssignGate");
-            if (method == null) { MessageBox.Show("Method cannot be bound"); }
 
-            var r = MethodParamInputDialog.Show(this, method, "Set the fields", "SI Gate Assignment dialog");
+
+            var r = MethodParamInputDialog.Show<SayIntentionsApiClient>(this, "AssignGate", "Set the fields", "SI Gate Assignment dialog");
             if (r.Result == DialogResult.OK)
             {
                 StringBuilder sb = new StringBuilder(); 

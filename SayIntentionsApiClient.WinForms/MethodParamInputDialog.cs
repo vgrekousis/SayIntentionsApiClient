@@ -18,11 +18,11 @@ public class ParamValue
 
 public static class MethodParamInputDialog
 {
-    public static MethodParamValueDialogResult Show(IWin32Window? owner, MethodInfo methodRef, string message, string caption)
+    public static MethodParamValueDialogResult Show<T>(IWin32Window? owner, string methodName, string message, string caption) where T : class
     {
+        var methodRef = typeof(T).GetMethod("AssignGate");
         if (methodRef == null) throw new ArgumentNullException(nameof(methodRef));
         var parameters = methodRef.GetParameters();
-        //parameterValues = new object[parameters.Length];
 
         if (string.IsNullOrEmpty(caption)) caption = nameof(MethodParamInputDialog);
 
@@ -129,8 +129,8 @@ public static class MethodParamInputDialog
         }
     }
 
-    public static MethodParamValueDialogResult Show(MethodInfo methodRef, string message, string caption)
+    public static MethodParamValueDialogResult Show<T>(string methodName, string message, string caption) where T : class
     {
-        return Show(null, methodRef, message, caption);
+        return Show<T>(null, methodName, message, caption);
     }
 }
