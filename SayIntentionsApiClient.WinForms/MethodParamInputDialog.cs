@@ -5,7 +5,7 @@ using System.Reflection;
 public class MethodParamValueDialogResult
 {
     public Type ClassType {  get; internal set; } = typeof(object);
-    public HashSet<MethodParamValue>? MethodParamValues = null;
+    public HashSet<MethodParamValue> MethodParamValues = new HashSet<MethodParamValue>();
     public DialogResult Result { get; internal set; }
 }
 
@@ -84,7 +84,7 @@ public static class MethodParamInputDialog
                 layout.Controls.Add(inputControl, 1, i + 1);
             }
 
-            var okButton = new Button { Text = "OK", DialogResult = DialogResult.OK, AutoSize = true };
+            var okButton = new Button { Text = MessageBoxButtons.OK.ToString(), DialogResult = DialogResult.OK, AutoSize = true };
             layout.Controls.Add(okButton, 1, parameters.Length + 1);
 
             form.Controls.Add(layout);
@@ -98,7 +98,6 @@ public static class MethodParamInputDialog
 
             if (result == DialogResult.OK)
             {
-                r.MethodParamValues = new HashSet<MethodParamValue>();
                 r.ClassType = methodRef.DeclaringType!;
 
                 for (int i = 0; i < parameters.Length; i++)
@@ -122,14 +121,9 @@ public static class MethodParamInputDialog
                         Index = i,
                     };
 
-                    r.MethodParamValues!.Add(paramValue);
+                    r.MethodParamValues.Add(paramValue);
                 }
             }
-            else
-            {
-                r.MethodParamValues = null;
-            }
-
             return r;
         }
     }
