@@ -10,7 +10,7 @@ public static class MethodParamInputDialog
         if (methodRef == null) throw new ArgumentNullException(nameof(methodRef));
         var parameters = methodRef.GetParameters();
 
-        if (string.IsNullOrEmpty(caption)) caption = nameof(MethodParamInputDialog);
+        if (string.IsNullOrEmpty(caption)) caption = methodRef.Name;
 
         using (var form = new Form
         {
