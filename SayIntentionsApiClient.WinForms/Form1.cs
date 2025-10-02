@@ -6,7 +6,7 @@ namespace SayIntentionsApiClient.WinForms
     {
         public Form1()
         { 
-            var r = MethodParamInputDialog.Show<SayIntentionsApiClient>(this, "AssignGate", "Set the fields", "SI Gate Assignment dialog");
+            var r = MethodParamInputDialog.Show<SayIntentionsApiClient>(this, "GetWeather", "Set the fields", "SI Gate Assignment dialog");
             if (r.Result == DialogResult.OK)
             {
                 MessageBox.Show(r.ToString());
