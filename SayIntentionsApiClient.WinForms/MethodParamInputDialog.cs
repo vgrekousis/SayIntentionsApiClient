@@ -4,7 +4,7 @@ using System.Reflection.Metadata.Ecma335;
 
 public static class MethodParamInputDialog
 {
-    public static MethodParamValueDialogResult Show<T>(IWin32Window? owner, string methodName, string message, string caption) where T : class
+    public static MethodParamValueDialogResult Show<T>(IWin32Window? owner, string methodName, string message, string? caption = null) where T : class
     {
         var methodRef = typeof(T).GetMethod(methodName);
         if (methodRef == null) throw new ArgumentNullException(nameof(methodRef));
